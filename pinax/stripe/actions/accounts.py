@@ -145,7 +145,7 @@ def sync_account_from_stripe_data(data, user=None):
     obj.legal_entity_type = le["type"]
     obj.legal_entity_first_name = le["first_name"]
     obj.legal_entity_last_name = le["last_name"]
-    obj.legal_entity_personal_id_number_provided = le["personal_id_number_provided"]
+    # obj.legal_entity_personal_id_number_provided = le["personal_id_number_provided"]
 
     # these attributes are not always present
     obj.legal_entity_gender = le.get(
