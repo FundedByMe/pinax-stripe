@@ -40,29 +40,29 @@ def update(account, data):
     Returns:
         a pinax.stripe.models.Account object
     """
-    stripe_account = stripe.Account.retrieve(id=account.stripe_id)
+    stripe_account = stripe.Account.modify(id=account.stripe_id, **data)
 
-    if data.get("dob"):
-        stripe_account.legal_entity.dob = data["dob"]
-
-    if data.get("first_name"):
-        stripe_account.legal_entity.first_name = data["first_name"]
-
-    if data.get("last_name"):
-        stripe_account.legal_entity.last_name = data["last_name"]
-
-    if data.get("personal_id_number"):
-        stripe_account.legal_entity.personal_id_number = data["personal_id_number"]
-
-    if data.get("document"):
-        response = stripe.FileUpload.create(
-            purpose="identity_document",
-            file=data["document"],
-            stripe_account=stripe_account.id
-        )
-        stripe_account.legal_entity.verification.document = response["id"]
-
-    stripe_account.save()
+    # if data.get("dob"):
+    #     stripe_account.legal_entity.dob = data["dob"]
+    #
+    # if data.get("first_name"):
+    #     stripe_account.legal_entity.first_name = data["first_name"]
+    #
+    # if data.get("last_name"):
+    #     stripe_account.legal_entity.last_name = data["last_name"]
+    #
+    # if data.get("personal_id_number"):
+    #     stripe_account.legal_entity.personal_id_number = data["personal_id_number"]
+    #
+    # if data.get("document"):
+    #     response = stripe.FileUpload.create(
+    #         purpose="identity_document",
+    #         file=data["document"],
+    #         stripe_account=stripe_account.id
+    #     )
+    #     stripe_account.legal_entity.verification.document = response["id"]
+    #
+    # stripe_account.save()
     return sync_account_from_stripe_data(stripe_account)
 
 
