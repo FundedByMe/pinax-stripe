@@ -135,7 +135,7 @@ def sync_account_from_stripe_data(data, user=None):
     obj.legal_entity_address_state = address["state"]
 
     dob = le["dob"]
-    if dob:
+    if all(dob['day'], dob['month'], dob['year']):
         obj.legal_entity_dob = datetime.date(
             dob["year"], dob["month"], dob["day"]
         )
