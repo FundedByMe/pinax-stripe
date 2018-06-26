@@ -636,8 +636,8 @@ class Account(StripeObject):
 class BankAccount(StripeObject):
 
     account = models.ForeignKey(Account, related_name="bank_accounts", on_delete=models.CASCADE)
-    account_holder_name = models.TextField()
-    account_holder_type = models.TextField()
+    account_holder_name = models.TextField(null=True, blank=True)
+    account_holder_type = models.TextField(null=True, blank=True)
     bank_name = models.TextField(null=True, blank=True)
     country = models.TextField()
     currency = models.TextField()
